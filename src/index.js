@@ -5,12 +5,12 @@ const port = 8080
 
 const onePageArticleCount = 10
 const {newsArticleModel} = require('./connector');
-
+const {data } = require('./data');
 // Parse JSON bodies (as sent by API clients)
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get('/newFeeds', async (req,res) => {
+app.get('/newFeeds', (req,res) => {
     let limit = parseInt(req.body.limit);
     let offset = parseInt(req.body.offset);
     if(!limit || limit > 10) {
@@ -21,9 +21,10 @@ app.get('/newFeeds', async (req,res) => {
     }
 
     let resArr = [];
-    const data = await newsArticleModel.find();
+    //const data = await newsArticleModel.find();
+    console.log(data);
     resArr = data.slice(offset,offset+limit);
-    res.send(resArr);
+    res.send(data);
 
 })
 
