@@ -11,9 +11,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get('/newFeeds', async (req,res) => {
-    let limit = req.body.limit;
-    let offset = req.body.offset;
-    if(!limit) {
+    let limit = parseInt(req.body.limit);
+    let offset = parseInt(req.body.offset);
+    if(!limit || limit > 10) {
         limit = 10;
     }
     if(!offset) {
